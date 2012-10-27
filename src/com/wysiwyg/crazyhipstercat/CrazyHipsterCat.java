@@ -13,22 +13,22 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 
 	private RelativeLayout relativeLayout;
 	private MediaPlayer mp;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.crazy_hipster_cat_activity);
-        relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
-        relativeLayout.setBackgroundResource(R.drawable.cat);
-        relativeLayout.setOnTouchListener(this);
-        mp = new MediaPlayer();
-        mp.create(getBaseContext(), R.raw.cat01);
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.crazy_hipster_cat_activity);
+		relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
+		relativeLayout.setBackgroundResource(R.drawable.cat);
+		relativeLayout.setOnTouchListener(this);
+		mp = MediaPlayer.create(getBaseContext(), R.raw.cat01);
+		mp.setLooping(true);
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.crazy_hipster_cat_activity, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.crazy_hipster_cat_activity, menu);
+		return true;
+	}
 
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN){
@@ -37,7 +37,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 			relativeLayout.setBackgroundResource(R.drawable.cat);
-			mp.stop();
+			mp.pause();
 		}
 		return true;
 	}
