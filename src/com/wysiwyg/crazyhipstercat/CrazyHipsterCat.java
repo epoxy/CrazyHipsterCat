@@ -20,6 +20,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
         relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
         relativeLayout.setBackgroundResource(R.drawable.cat);
         relativeLayout.setOnTouchListener(this);
+        mp = new MediaPlayer();
+        mp.create(getBaseContext(), R.raw.cat01);
     }
 
     @Override
@@ -31,10 +33,11 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN){
 			relativeLayout.setBackgroundResource(R.drawable.cat2);
-			
+			mp.start();
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 			relativeLayout.setBackgroundResource(R.drawable.cat);
+			mp.stop();
 		}
 		return true;
 	}
