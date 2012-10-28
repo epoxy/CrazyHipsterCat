@@ -1,26 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wysiwyg.crazyhipstercat"
-    android:versionCode="1"
-    android:versionName="1.0.0" >
-    
+    android:versionCode="2"
+    android:versionName="1.1.0" >
+
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
     </uses-permission>
 
     <uses-sdk
-        android:minSdkVersion="8"
         android:maxSdkVersion="15"
+        android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name=".CrazyHipsterCat"
-            android:label="@string/title_activity_crazy_hipster_cat" 
             android:configChanges="orientation"
+            android:label="@string/title_activity_crazy_hipster_cat"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+    </application>
+    <application>
     </application>
 
 </manifest>
