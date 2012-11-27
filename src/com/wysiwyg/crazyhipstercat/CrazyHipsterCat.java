@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Path.FillType;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 	private RelativeLayout relativeLayout;
 	private MediaPlayer mp;
 	private AdView adView;
+	private Vibrator v;
+	private long[] vibratePattern = {0, 500, 1000};
 	//private RelativeLayout.LayoutParams adParams;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,9 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 		
 //	    // Initiate a generic request to load it with an ad
 	    adView.loadAd(adRequest);
-		
+	    
+	    // Get instance of Vibrator from current Context
+	    v = (Vibrator) getSystemService(getBaseContext().VIBRATOR_SERVICE);		
 	}
 
 	@Override
@@ -53,13 +58,23 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 		if (event.getAction() == MotionEvent.ACTION_DOWN){
 			relativeLayout.setBackgroundResource(R.drawable.cat2);
 			mp.start();
+			startVibrateOnHold();
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 			relativeLayout.setBackgroundResource(R.drawable.cat);
 			mp.pause();
+			stopVibrateOnRelease();
 		}
 		return true;
 	}
+	
+	public void startVibrateOnHold(){
+		v.vibrate(vibratePattern, 0);
+	}
+	public void stopVibrateOnRelease(){
+		v.cancel();
+	}
+	
 	public void onDestroy() {
 	    if (adView != null) {
 	      adView.destroy();
