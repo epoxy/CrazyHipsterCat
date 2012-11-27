@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import com.google.ads.*;
+import com.wysiwyg.crazyhipstercat.R.id;
 
 public class CrazyHipsterCat extends Activity implements OnTouchListener{
 
@@ -21,6 +23,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 	private AdView adView;
 	private Vibrator v;
 	private long[] vibratePattern = {0, 500, 1000};
+	private CheckBox mute, vibrate;
 	//private RelativeLayout.LayoutParams adParams;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,12 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 	    adView.loadAd(adRequest);
 	    
 	    // Get instance of Vibrator from current Context
-	    v = (Vibrator) getSystemService(getBaseContext().VIBRATOR_SERVICE);		
+	    v = (Vibrator) getSystemService(getBaseContext().VIBRATOR_SERVICE);
+	    
+	    //Checkboxes
+	    mute = (CheckBox) findViewById(id.chkMute);
+	    vibrate = (CheckBox) findViewById(id.chkVibrate);
+	    
 	}
 
 	@Override
@@ -57,13 +65,21 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener{
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN){
 			relativeLayout.setBackgroundResource(R.drawable.cat2);
-			mp.start();
-			startVibrateOnHold();
+			if(!mute.isChecked()){
+				mp.start();
+			}
+			if(vibrate.isChecked()){
+				startVibrateOnHold();
+			}
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 			relativeLayout.setBackgroundResource(R.drawable.cat);
-			mp.pause();
-			stopVibrateOnRelease();
+			if(!mute.isChecked()){
+				mp.pause();
+			}
+			if(vibrate.isChecked()){
+				stopVibrateOnRelease();
+			}
 		}
 		return true;
 	}
