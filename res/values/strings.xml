@@ -3,6 +3,9 @@
     <string name="app_name">Crazy Hipster Cat</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="chk_mute">Mute</string>
+    <string name="chk_vibrate">Vibrate</string>
     <string name="title_activity_crazy_hipster_cat">Crazy Hipster Cat</string>
+    
 
 </resources>
