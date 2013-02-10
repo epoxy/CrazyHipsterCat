@@ -7,6 +7,7 @@
     <string name="chk_vibrate">Vibrate</string>
     <string name="button_left">Prev</string>    
     <string name="button_right">Next</string>    
+    <string name="button_random">Random</string>    
     <string name="title_activity_crazy_hipster_cat">Crazy Hipster Cat</string>
     
 

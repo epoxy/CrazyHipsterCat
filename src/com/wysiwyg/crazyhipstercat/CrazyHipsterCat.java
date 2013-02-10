@@ -1,5 +1,7 @@
 package com.wysiwyg.crazyhipstercat;
 
+import java.util.Random;
+
 import com.google.ads.AdView;
 
 import android.app.Activity;
@@ -28,14 +30,16 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private Vibrator v;
 	private long[] vibratePattern = {0, 500, 1000};
 	private CheckBox mute, vibrate;
-	private Button leftButton, rightButton;
+	private Button leftButton, rightButton, randomButton;
 	private String catString = "cat";
 	private String catPictureString, catPicture;
 	private int catPictureIdentifier;
-	private int nbrOfPictures=5;
+	private int nbrOfPictures=6;
 	private int resID;
+	private int oldIdentifier;
 	private Drawable drawableCat;
 	private int buttonColor, textColor;
+	private Random randomizer;
 	//private RelativeLayout.LayoutParams adParams;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		// Create the adView
 		adView = (AdView)findViewById(R.id.adMob);
 
-		catPictureIdentifier = nbrOfPictures;
+		catPictureIdentifier = nbrOfPictures-1;
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
 		relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
@@ -81,12 +85,19 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//Buttons
 		leftButton = (Button) findViewById(R.id.buttonLeft);
 		rightButton = (Button) findViewById(R.id.buttonRight);
+		randomButton = (Button) findViewById(R.id.buttonRandom);
 		leftButton.setBackgroundColor(buttonColor);
 		rightButton.setBackgroundColor(buttonColor);
+		randomButton.setBackgroundColor(buttonColor);
 		leftButton.setTypeface(Typeface.DEFAULT_BOLD);
 		rightButton.setTypeface(Typeface.DEFAULT_BOLD);
+		randomButton.setTypeface(Typeface.DEFAULT_BOLD);
 		leftButton.setOnClickListener((OnClickListener) this);
 		rightButton.setOnClickListener((OnClickListener) this);
+		randomButton.setOnClickListener((OnClickListener) this);
+		
+		//Randomizer
+		randomizer = new Random();
 	}
 
 	@Override
@@ -128,16 +139,19 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	
 	public void onClick(View v) {
 		if(v==findViewById(R.id.buttonLeft)){
-			if(catPictureIdentifier!=1){
-				catPictureIdentifier--;
+			catPictureIdentifier=(catPictureIdentifier+6-1)%nbrOfPictures;
 				System.out.println("left" + catPictureIdentifier);
-			}
 		}
 		if(v==findViewById(R.id.buttonRight)){
-			if(catPictureIdentifier!=nbrOfPictures){
-				catPictureIdentifier++;
+				catPictureIdentifier=(catPictureIdentifier+1)%nbrOfPictures;
 				System.out.println("right" + catPictureIdentifier);
-			}
+		}
+		if(v==findViewById(R.id.buttonRandom)){
+			do{
+			oldIdentifier = catPictureIdentifier;
+			catPictureIdentifier = (int) (nbrOfPictures*randomizer.nextDouble());
+			System.out.println("random" + catPictureIdentifier);
+			} while(oldIdentifier==catPictureIdentifier);
 		}
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
