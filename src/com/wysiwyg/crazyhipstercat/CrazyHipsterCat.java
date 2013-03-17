@@ -2,16 +2,11 @@ package com.wysiwyg.crazyhipstercat;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.google.ads.AdView;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -25,14 +20,12 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.google.ads.*;
 import com.wysiwyg.crazyhipstercat.R.id;
 
 public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClickListener{
-
 	private RelativeLayout relativeLayout;
 	private MediaPlayer mp, mpGoat;
 	private AdView adView;
@@ -46,7 +39,6 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private int nbrOfPictures=6;
 	private int resID;
 	private int oldIdentifier;
-	private Drawable drawableCat;
 	private int buttonColor, textColor;
 	private Random randomizer;
 	private View[] goatImage;
@@ -57,7 +49,6 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private int goatHeight;
 	private RelativeLayout.LayoutParams goatLayout;
 	private int apiLevel;
-	//private RelativeLayout.LayoutParams adParams;
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +61,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		adRequest.addTestDevice("0019a4c2749d9e");// Test Android Device
 
 		//Get API-level
-		apiLevel=Integer.valueOf(android.os.Build.VERSION.SDK);
-		Log.i("TAG", "API" + Integer.valueOf(android.os.Build.VERSION.SDK));
+		apiLevel=Integer.valueOf(android.os.Build.VERSION.SDK_INT);
+		Log.i("TAG", "API" + Integer.valueOf(android.os.Build.VERSION.SDK_INT));
 
 		// Create the adView
 		adView = (AdView)findViewById(R.id.adMob);
@@ -80,9 +71,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
 		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
-		drawableCat = getResources().getDrawable(resID);
 		relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
-		relativeLayout.setBackground(drawableCat);
+		relativeLayout.setBackgroundResource(resID);
 		relativeLayout.setOnTouchListener(this);
 		mp = MediaPlayer.create(getBaseContext(), R.raw.cat01);
 		mp.setLooping(true);
@@ -161,9 +151,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 
 			catPicture = catPictureString + "open";
 			resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
-			drawableCat = getResources().getDrawable(resID);
-			//			relativeLayout.setBackground(drawableCat);
-			relativeLayout.setBackgroundDrawable(drawableCat);
+			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
 				mp.start();
 			}
@@ -179,8 +167,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 
 			catPicture = catPictureString + "closed";
 			resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
-			drawableCat = getResources().getDrawable(resID);
-			relativeLayout.setBackgroundDrawable(drawableCat);
+			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
 				mp.pause();
 			}
@@ -210,8 +197,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
 		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
-		drawableCat = getResources().getDrawable(resID);
-		relativeLayout.setBackgroundDrawable(drawableCat);
+		relativeLayout.setBackgroundResource(resID);
 		System.out.println(catPicture);
 
 	}
@@ -245,10 +231,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 				try {
 					mpGoat.prepare();
 				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
+					Log.e("EXCEPTION", "Illegal state", e);
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					Log.e("EXCEPTION", "IOException", e);
 					e.printStackTrace();
 				}
 				goatRunning=false;
