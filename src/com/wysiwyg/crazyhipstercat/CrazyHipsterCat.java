@@ -49,7 +49,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private Drawable drawableCat;
 	private int buttonColor, textColor;
 	private Random randomizer;
-	private View goatImage;
+	private View[] goatImage;
 	private boolean goatRunning;
 	private int width;
 	private int height;
@@ -76,11 +76,13 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		// Create the adView
 		adView = (AdView)findViewById(R.id.adMob);
 
-		catPictureIdentifier = nbrOfPictures-1;
+		catPictureIdentifier = 0;
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
+		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
+		drawableCat = getResources().getDrawable(resID);
 		relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
-		relativeLayout.setBackgroundResource(R.drawable.cat5closed);
+		relativeLayout.setBackground(drawableCat);
 		relativeLayout.setOnTouchListener(this);
 		mp = MediaPlayer.create(getBaseContext(), R.raw.cat01);
 		mp.setLooping(true);
@@ -122,8 +124,11 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		randomizer = new Random();
 
 		//GoatImage
-		goatImage = findViewById(R.id.goatImage);
-		goatImage.setVisibility(View.GONE);
+		goatImage = new ImageView[2];
+		goatImage[0] = findViewById(R.id.goatImage);
+		goatImage[1] = findViewById(R.id.goatImage2);
+		goatImage[0].setVisibility(View.GONE);
+		goatImage[1].setVisibility(View.GONE);
 		//Adjust size of goat
 		if(apiLevel>=11){
 			DisplayMetrics metrics = this.getResources().getDisplayMetrics();
@@ -132,17 +137,13 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			goatWidth = width/3;
 			goatHeight = height/3;
 			goatLayout = new RelativeLayout.LayoutParams (goatWidth, goatHeight);
-			goatImage.setLayoutParams(goatLayout);
-			goatImage.requestLayout();
-			goatImage.setX(width-goatWidth);
+			for(View goatElem : goatImage){
+				goatElem.setLayoutParams(goatLayout);
+				goatElem.requestLayout();
+			}
+			goatImage[0].setX(width-goatWidth);
+			goatImage[1].setX(0);
 		}
-		//TODO kolla att det funkar med API 8
-		
-		//goatImage.layout(width-goatWidth, 1, goatWidth, goatHeight);
-		
-		//goatImage.layout(1, 1, 123, goatHeight);
-		Log.i("TAG", "" + width + " " + height);
-		
 		//GoatSound
 		mpGoat = MediaPlayer.create(getBaseContext(), R.raw.goat);
 		mpGoat.setLooping(false);
@@ -219,13 +220,17 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//Randomize position of goat
 		if(api>=11){
 			int randomYPos = (int) ((height-goatHeight-50)*(randomizer.nextDouble()));
-			int RandomSide = 
+			int randomSide = randomizer.nextInt(2);
+			Log.i("TAG", "Randomizer" + randomSide);
 			Log.i("TAG", "dandHeight" + height);
 			Log.i("TAG", "dandHeight" + goatHeight);
 			Log.i("TAG", "dandHeight" + randomYPos);
-			goatImage.setY(randomYPos);
+			goatImage[randomSide].setY(randomYPos);
+			goatImage[randomSide].setVisibility(View.VISIBLE);
 		}
-		goatImage.setVisibility(View.VISIBLE);
+		else{
+			goatImage[0].setVisibility(View.VISIBLE);
+		}
 		if(!mute.isChecked()){
 			mpGoat.start();
 		}
@@ -235,7 +240,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			}
 
 			public void onFinish() {
-				goatImage.setVisibility(View.GONE);
+				goatImage[0].setVisibility(View.GONE);
+				goatImage[1].setVisibility(View.GONE);
 				try {
 					mpGoat.prepare();
 				} catch (IllegalStateException e) {
