@@ -27,7 +27,7 @@ import com.wysiwyg.crazyhipstercat.R.id;
 
 public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClickListener{
 	private RelativeLayout relativeLayout;
-	private MediaPlayer mp, mpGoat;
+	private MediaPlayer mp, mpGoat, mpParty;
 	private AdView adView;
 	private Vibrator v;
 	private long[] vibratePattern = {0, 500, 1000};
@@ -142,7 +142,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//GoatSound
 		mpGoat = MediaPlayer.create(getBaseContext(), R.raw.goat);
 		mpGoat.setLooping(false);
-
+		
+		//Partysound
+		mpParty= MediaPlayer.create(getBaseContext(), R.raw.party);
+		mpParty.setLooping(false);
 	}
 
 	@Override
@@ -159,6 +162,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
 				mp.start();
+				//Partysound
+				if(catPictureIdentifier==6){
+					mpParty.start();
+				}
 			}
 			if(vibrate.isChecked()){
 				startVibrateOnHold();
@@ -168,7 +175,6 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 					showGoat(apiLevel);
 				}
 			}
-
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 
@@ -177,6 +183,18 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
 				mp.pause();
+				//Partysound
+				if(catPictureIdentifier==6){
+					mpParty.stop();
+					try {
+						mpParty.prepare();
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					mpParty.seekTo(0);
+				}
 			}
 			if(vibrate.isChecked()){
 				stopVibrateOnRelease();
