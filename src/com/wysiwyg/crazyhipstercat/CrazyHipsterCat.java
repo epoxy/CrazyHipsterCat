@@ -36,7 +36,9 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private String catString = "cat";
 	private String catPictureString, catPicture;
 	private int catPictureIdentifier;
-	private int nbrOfPictures=6;
+	/*Increment at new release*/
+	private int nbrOfPictures=7;
+	private int startingCat=6;
 	private int resID;
 	private int oldIdentifier;
 	private int buttonColor, textColor;
@@ -67,7 +69,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		// Create the adView
 		adView = (AdView)findViewById(R.id.adMob);
 
-		catPictureIdentifier = 0;
+		catPictureIdentifier = startingCat;
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
 		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
@@ -185,7 +187,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 
 	public void onClick(View v) {
 		if(v==findViewById(R.id.buttonLeft)){
-			catPictureIdentifier=(catPictureIdentifier+6-1)%nbrOfPictures;
+			catPictureIdentifier=(catPictureIdentifier+nbrOfPictures-1)%nbrOfPictures;
 			System.out.println("left" + catPictureIdentifier);
 		}
 		if(v==findViewById(R.id.buttonRight)){
