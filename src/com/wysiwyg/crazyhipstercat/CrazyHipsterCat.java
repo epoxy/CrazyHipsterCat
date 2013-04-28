@@ -31,7 +31,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private AdView adView;
 	private Vibrator v;
 	private long[] vibratePattern = {0, 500, 1000};
-	private CheckBox mute, vibrate;
+	private CheckBox mute, vibrate, goatCheck;
 	private Button leftButton, rightButton, randomButton;
 	private String catString = "cat";
 	private String catPictureString, catPicture;
@@ -91,10 +91,13 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//Checkboxes
 		mute = (CheckBox) findViewById(id.chkMute);
 		vibrate = (CheckBox) findViewById(id.chkVibrate);
+		goatCheck = (CheckBox) findViewById(id.chkGoat);
 		mute.setTextColor(textColor);
 		vibrate.setTextColor(textColor);
+		goatCheck.setTextColor(textColor);
 		mute.setTypeface(Typeface.DEFAULT_BOLD);
 		vibrate.setTypeface(Typeface.DEFAULT_BOLD);
+		goatCheck.setTypeface(Typeface.DEFAULT_BOLD);
 
 		//Buttons
 		leftButton = (Button) findViewById(R.id.buttonLeft);
@@ -158,8 +161,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			if(vibrate.isChecked()){
 				startVibrateOnHold();
 			}
-			if(!goatRunning){
-				showGoat(apiLevel);
+			if(goatCheck.isChecked()){
+				if(!goatRunning){
+					showGoat(apiLevel);
+				}
 			}
 
 		}
