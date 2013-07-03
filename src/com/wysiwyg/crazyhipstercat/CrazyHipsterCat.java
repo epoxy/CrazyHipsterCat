@@ -27,7 +27,7 @@ import com.wysiwyg.crazyhipstercat.R.id;
 
 public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClickListener{
 	private RelativeLayout relativeLayout;
-	private MediaPlayer mp, mpGoat, mpParty;
+	private MediaPlayer mp, mpGoat, mpParty, mpSlurp;
 	private AdView adView;
 	private Vibrator v;
 	private long[] vibratePattern = {0, 500, 1000};
@@ -37,8 +37,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private String catPictureString, catPicture;
 	private int catPictureIdentifier;
 	/*Increment at new release*/
-	private int nbrOfPictures=7;
-	private int startingCat=6;
+	private int nbrOfPictures=8;
+	private int startingCat=7;
 	private int resID;
 	private int oldIdentifier;
 	private int buttonColor, textColor;
@@ -146,6 +146,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//Partysound
 		mpParty= MediaPlayer.create(getBaseContext(), R.raw.party);
 		mpParty.setLooping(false);
+		
+		//SlurpSound
+		mpSlurp = MediaPlayer.create(getBaseContext(), R.raw.slurp);
+		mpSlurp.setLooping(true);
 	}
 
 	@Override
@@ -161,10 +165,16 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
 			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
-				mp.start();
 				//Partysound
 				if(catPictureIdentifier==6){
 					mpParty.start();
+				}
+				//SlurpSound
+				else if(catPictureIdentifier==7){
+					mpSlurp.start();
+				}
+				else{
+					mp.start();
 				}
 			}
 			if(vibrate.isChecked()){
@@ -182,7 +192,6 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
 			relativeLayout.setBackgroundResource(resID);
 			if(!mute.isChecked()){
-				mp.pause();
 				//Partysound
 				if(catPictureIdentifier==6){
 					mpParty.stop();
@@ -194,6 +203,13 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 						e.printStackTrace();
 					}
 					mpParty.seekTo(0);
+				}
+				//SlurpSound
+				else if(catPictureIdentifier==7){
+					mpSlurp.pause();
+				}
+				else{
+					mp.pause();
 				}
 			}
 			if(vibrate.isChecked()){
