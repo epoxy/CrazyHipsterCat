@@ -37,8 +37,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private String catPictureString, catPicture;
 	private int catPictureIdentifier;
 	/*Increment at new release*/
-	private int nbrOfPictures=8;
-	private int startingCat=7;
+	private int nbrOfPictures=9;
+	private int startingCat=8;
 	private int resID;
 	private int oldIdentifier;
 	private int buttonColor, textColor;
@@ -51,6 +51,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private int goatHeight;
 	private RelativeLayout.LayoutParams goatLayout;
 	private int apiLevel;
+	private WorldCupCat wcCat;
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		//request TEST ads to avoid being disabled for clicking your own ads
 		AdRequest adRequest = new AdRequest();
 		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);// Emulator
+		adRequest.addTestDevice("7303510311208FACF64CC97E71F0F2ED");// Test Android Device
 		adRequest.addTestDevice("0019a4c2749d9e");// Test Android Device
 
 		//Get API-level
@@ -70,14 +72,13 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		adView = (AdView)findViewById(R.id.adMob);
 
 		catPictureIdentifier = startingCat;
-		catPictureString = catString + catPictureIdentifier;
-		catPicture = catPictureString + "closed";
-		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
+		
 		relativeLayout=(RelativeLayout) findViewById(R.id.relative_layout);
-		relativeLayout.setBackgroundResource(resID);
 		relativeLayout.setOnTouchListener(this);
 		mp = MediaPlayer.create(getBaseContext(), R.raw.cat01);
 		mp.setLooping(true);
+
+		launchVCCat();
 
 		// Initiate a generic request to load it with an ad
 		adView.loadAd(adRequest);
@@ -185,6 +186,9 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 					showGoat(apiLevel);
 				}
 			}
+			if(catPictureIdentifier==8){
+				wcCat.onTouch(v, event);
+			}
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP){
 
@@ -215,6 +219,9 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 			if(vibrate.isChecked()){
 				stopVibrateOnRelease();
 			}
+			if(catPictureIdentifier==8){
+				wcCat.onTouch(v, event);
+			}
 		}
 		return true;
 	}
@@ -235,13 +242,15 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 				System.out.println("random" + catPictureIdentifier);
 			} while(oldIdentifier==catPictureIdentifier);
 		}
-		catPictureString = catString + catPictureIdentifier;
-		catPicture = catPictureString + "closed";
-		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
-		relativeLayout.setBackgroundResource(resID);
-		System.out.println(catPicture);
-
+		if(catPictureIdentifier==8){
+			launchVCCat();
+		}
+		else{
+			launchStandardCat();
+		}
 	}
+	
+
 	@SuppressLint("NewApi")
 	public void showGoat(int api){
 		//Randomize position of goat
@@ -289,11 +298,33 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	public void stopVibrateOnRelease(){
 		v.cancel();
 	}
+	
+	private void launchStandardCat() {
+		relativeLayout.removeView(wcCat);
+		catPictureString = catString + catPictureIdentifier;
+		catPicture = catPictureString + "closed";
+		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());
+		relativeLayout.setBackgroundResource(resID);
+		System.out.println(catPicture);
+	}
+	
+	private void launchVCCat(){
+		if(wcCat==null){
+			wcCat = new WorldCupCat(this);
+		}
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+		relativeLayout.addView(wcCat, 0, params);
+	}
 
 	public void onDestroy() {
 		if (adView != null) {
 			adView.destroy();
 		}
 		super.onDestroy();
+	}
+	public View getRelativeLayout(){
+		return relativeLayout;
 	}
 }
