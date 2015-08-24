@@ -2,25 +2,53 @@
 <items version="2" >
 
     <item
-        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services/5.0.89/jars/classes.jar"
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa">
-        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-6fd9490a80b88218d7a71a3e15b6a1be818845c8.jar" />
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-35d42e4c8fa816eeae20cda52e3e540dd16509ee.jar" />
     </item>
     <item
-        jar="/home/epoxy/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.8.0/jars/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/support-v4-19.1.0-29040c979afb659af78eba62e14f61ad2917cdc6.jar" />
+        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-a0cac090eec078ae3045470708605497eed8b333.jar" />
     </item>
     <item
-        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/jars/classes.jar"
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/jars/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-6cd0b9e87b81e41477c691651a0da7c30cae7eb5.jar" />
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-580dabaebf8af6138398bf5a60ba45c3e6638a2c.jar" />
+    </item>
+    <item
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e23ea11124bb700eeddd4ab7aa848c615f493850">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-5649b699da36bc37ccec1a2f513b46ae3b5c20f7.jar" />
+    </item>
+    <item
+        jar="/home/epoxy/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-4fd196b71a908bc71e07d8e52cb9ca233c259b60.jar" />
+    </item>
+    <item
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1ff30fa49c07a08c3035d7218a3efebf5680d522">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-b4af7b4f9cbbaf9f3a2ed7be05aa13756c647387.jar" />
+    </item>
+    <item
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-6945858629bcefba18494fd6ef28e6c83264b602.jar" />
     </item>
 
 </items>

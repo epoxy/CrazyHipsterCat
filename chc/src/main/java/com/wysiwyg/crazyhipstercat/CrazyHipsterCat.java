@@ -2,7 +2,8 @@ package com.wysiwyg.crazyhipstercat;
 
 import java.io.IOException;
 import java.util.Random;
-//import com.google.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -60,11 +61,9 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.crazy_hipster_cat_activity);
 
-/*		//request TEST ads to avoid being disabled for clicking your own ads
-		AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);// Emulator
-		adRequest.addTestDevice("7303510311208FACF64CC97E71F0F2ED");// Test Android Device
-		adRequest.addTestDevice("0019a4c2749d9e");// Test Android Device*/
+		AdView mAdView = (AdView) findViewById(id.adMob);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
 
 		//Get API-level
 		apiLevel=Integer.valueOf(android.os.Build.VERSION.SDK_INT);
@@ -72,6 +71,16 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 
 		// Create the adView
 		adView = (AdView)findViewById(R.id.adMob);
+		//Create adrequest
+		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+		adRequestBuilder.build();
+		//request TEST ads to avoid being disabled for clicking your own ads
+		adRequestBuilder.addTestDevice("B594E44B527647B562E2B4045EA7BA79");
+		mAdView.loadAd(adRequest);
+		//TODO
+		/*adRequest.addTestDevice(AdRequest.TEST_EMULATOR);// Emulator
+		adRequest.addTestDevice("7303510311208FACF64CC97E71F0F2ED");// Test Android Device
+		adRequest.addTestDevice("0019a4c2749d9e");// Test Android Device*/
 
 		catPictureIdentifier = startingCat;
 		
