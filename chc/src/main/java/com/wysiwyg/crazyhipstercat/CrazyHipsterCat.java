@@ -40,8 +40,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	private String catPictureString, catPicture;
 	private int catPictureIdentifier;
 	/*Increment at new release*/
-	private int nbrOfPictures=9;
-	private int startingCat=8;
+	private int nbrOfPictures=10;
+	private int startingCat=9;
 	private int resID;
 	private int oldIdentifier;
 	private int buttonColor, textColor;
@@ -89,7 +89,8 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 		mp = MediaPlayer.create(getBaseContext(), R.raw.cat01);
 		mp.setLooping(true);
 
-		launchVCCat();
+		//Decide which cat to launch at startup
+		launchStandardCat();
 
 		// Initiate a generic request to load it with an ad
 		//adView.loadAd(adRequest);
@@ -311,7 +312,10 @@ public class CrazyHipsterCat extends Activity implements OnTouchListener, OnClic
 	}
 	
 	private void launchStandardCat() {
-		relativeLayout.removeView(wcCat);
+		if(wcCat!=null){
+			relativeLayout.removeView(wcCat);
+			wcCat = null;
+		}
 		catPictureString = catString + catPictureIdentifier;
 		catPicture = catPictureString + "closed";
 		resID = getResources().getIdentifier(catPicture, "drawable", getPackageName());

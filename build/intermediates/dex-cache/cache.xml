@@ -37,6 +37,13 @@
         <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-4fd196b71a908bc71e07d8e52cb9ca233c259b60.jar" />
     </item>
     <item
+        jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/pre-dexed/debug/classes-6cd0b9e87b81e41477c691651a0da7c30cae7eb5.jar" />
+    </item>
+    <item
         jar="/home/epoxy/AndroidStudioProjects/CrazyHipsterCat/chc/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/jars/classes.jar"
         jumboMode="false"
         revision="19.1.0"
